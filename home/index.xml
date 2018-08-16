@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Homes on Academic</title>
+    <title>Homes on Matheus Ferraciolli</title>
     <link>https://mferrac.github.io/home/</link>
-    <description>Recent content in Homes on Academic</description>
+    <description>Recent content in Homes on Matheus Ferraciolli</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -27,8 +27,7 @@
       <pubDate>Wed, 20 Apr 2016 00:00:00 -0300</pubDate>
       
       <guid>https://mferrac.github.io/home/about/</guid>
-      <description>Biography Lena Smith is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet.</description>
+      <description>Biography An Agricultural Engineer turned data scientist by crop yield modeling. I started using machine learning studying the effects of spatial autocorrelation in empirical modeling of sugarcane yield. After that, in many different fields like coffee disease occurrence prediction and soil classification models. Outside of agriculture, since every modern application uses lots of data, I&amp;rsquo;ve participated on projects on logistics transportation, car GPS tracking, students performance on online education and survey data analysis.</description>
     </item>
     
     <item>
