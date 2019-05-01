@@ -6,9 +6,25 @@
     <description>Recent content in Posts on Matheus Ferraciolli</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Wed, 01 May 2019 09:32:50 -0300</lastBuildDate>
     
 	<atom:link href="https://mferrac.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FEG18 Aula02</title>
+      <link>https://mferrac.github.io/post/feg18-aula02/</link>
+      <pubDate>Wed, 01 May 2019 09:32:50 -0300</pubDate>
+      
+      <guid>https://mferrac.github.io/post/feg18-aula02/</guid>
+      <description>Instruções para a aula 02 Instalação do Jupyter com R Para instalar o Jupyter notebook no windows, primeiro é preciso instalar o anaconda no link:
+https://www.anaconda.com/distribution/
+Selecione &amp;ldquo;windows&amp;rdquo; e clique em Download abaixo de Python 3.7 Version.
+Em seguida, execute o arquivo Anaconda3-2019.03-Windows-x86_64.exe e siga as instruções de instalação.
+Após instalar, procure Anaconda Prompt na pesquisa do Windows e execute o programa.
+No terminal aberto, digite o comando:
+conda install -c r r-irkernel  Básicos de R com swirl Para instalar o pacote swirl, basta executar o comando abaixo.</description>
+    </item>
     
   </channel>
 </rss>
