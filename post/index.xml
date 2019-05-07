@@ -17,12 +17,14 @@
       <pubDate>Wed, 01 May 2019 09:32:50 -0300</pubDate>
       
       <guid>https://mferrac.github.io/post/feg18-aula02/</guid>
-      <description>Arquivos da aula Os arquivos da aula podem ser baixados neste link.
+      <description>Homework  Baixe os dados em https://transfer.sh/ElXkS/adult_data.csv
+ Importe os dados no Rstudio
+ Envie as respostas pelo formulário
+  Arquivos da aula Os arquivos da aula podem ser baixados neste link.
 Instalação do Jupyter com R Para instalar o Jupyter notebook no windows, primeiro é preciso instalar o anaconda no link:
 https://www.anaconda.com/distribution/
 Selecione &amp;ldquo;windows&amp;rdquo; e clique em Download abaixo de Python 3.7 Version.
-Em seguida, execute o arquivo Anaconda3-2019.03-Windows-x86_64.exe e siga as instruções de instalação.
-Após instalar, procure Anaconda Prompt na pesquisa do Windows e execute o programa.</description>
+Em seguida, execute o arquivo Anaconda3-2019.</description>
     </item>
     
   </channel>
