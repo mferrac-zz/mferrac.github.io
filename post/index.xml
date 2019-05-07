@@ -20,11 +20,11 @@
       <description>Homework  Baixe os dados em https://transfer.sh/ElXkS/adult_data.csv
  Importe os dados no Rstudio
  Envie as respostas pelo formulário
-  Arquivos da aula Os arquivos da aula podem ser baixados neste link.
+  Arquivos da aula O notebook da aula pode ser baixado neste link
+Os arquivos da aula podem ser baixados neste link.
 Instalação do Jupyter com R Para instalar o Jupyter notebook no windows, primeiro é preciso instalar o anaconda no link:
 https://www.anaconda.com/distribution/
-Selecione &amp;ldquo;windows&amp;rdquo; e clique em Download abaixo de Python 3.7 Version.
-Em seguida, execute o arquivo Anaconda3-2019.</description>
+Selecione &amp;ldquo;windows&amp;rdquo; e clique em Download abaixo de Python 3.</description>
     </item>
     
   </channel>
