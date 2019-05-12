@@ -5,8 +5,42 @@
     <description>Recent content in Matheus Ferraciolli on Matheus Ferraciolli</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 May 2019 09:32:50 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 12 May 2019 16:13:50 -0300</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Análise de Dados - Aula 03</title>
+      <link>https://mferrac.github.io/post/feg18-aula03/</link>
+      <pubDate>Sun, 12 May 2019 16:13:50 -0300</pubDate>
+      
+      <guid>https://mferrac.github.io/post/feg18-aula03/</guid>
+      <description>
+
+&lt;h1 id=&#34;instalações&#34;&gt;Instalações&lt;/h1&gt;
+
+&lt;p&gt;Para esta aula, serão necessários os pacotes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mlr&lt;/code&gt;: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso.
+Mais informações no &lt;a href=&#34;https://mlr.mlr-org.com/&#34; target=&#34;_blank&#34;&gt;site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpart&lt;/code&gt;: A implementação do algoritmo de árvores de decisão. Mais informações no &lt;a href=&#34;https://cran.r-project.org/web/packages/rpart/rpart.pdf&#34; target=&#34;_blank&#34;&gt;manual&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpart.plot&lt;/code&gt;: Contém funções para visualização da árvore de decisão.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tidyverse&lt;/code&gt;: Instalado na aula 02&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Para instalar cada um destes pacotes, basta usar o comandos &lt;code&gt;install.packages(&amp;quot;nome_do_pacote&amp;quot;)&lt;/code&gt;. Por exemplo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;mlr&amp;quot;)
+install.packages(&amp;quot;rpart&amp;quot;)
+install.packages(&amp;quot;rpart.plot&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Para instalar todos os pacotes de uma vez, use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(c(&amp;quot;mlr&amp;quot;,&amp;quot;rpart&amp;quot;,&amp;quot;rpart.plot&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Análise de Dados - Aula 02</title>
