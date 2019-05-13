@@ -16,16 +16,20 @@
       <guid>https://mferrac.github.io/post/feg18-aula03/</guid>
       <description>
 
+&lt;h1 id=&#34;dados-para-a-aula&#34;&gt;Dados para a aula&lt;/h1&gt;
+
+&lt;p&gt;Baixar em transfer.sh/I109G/aula03.zip&lt;/p&gt;
+
 &lt;h1 id=&#34;instalações&#34;&gt;Instalações&lt;/h1&gt;
 
 &lt;p&gt;Para esta aula, serão necessários os pacotes:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;mlr&lt;/code&gt;: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso.
-Mais informações no &lt;a href=&#34;https://mlr.mlr-org.com/&#34; target=&#34;_blank&#34;&gt;site&lt;/a&gt;&lt;/li&gt;
+Mais informações no &lt;a href=&#34;https://mlr.mlr-org.com/&#34; target=&#34;_blank&#34;&gt;site&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;rpart&lt;/code&gt;: A implementação do algoritmo de árvores de decisão. Mais informações no &lt;a href=&#34;https://cran.r-project.org/web/packages/rpart/rpart.pdf&#34; target=&#34;_blank&#34;&gt;manual&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;rpart.plot&lt;/code&gt;: Contém funções para visualização da árvore de decisão.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;tidyverse&lt;/code&gt;: Instalado na aula 02&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tidyverse&lt;/code&gt;: Instalado na aula 02.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Para instalar cada um destes pacotes, basta usar o comandos &lt;code&gt;install.packages(&amp;quot;nome_do_pacote&amp;quot;)&lt;/code&gt;. Por exemplo:&lt;/p&gt;
