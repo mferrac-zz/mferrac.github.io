@@ -17,9 +17,12 @@
       <pubDate>Sun, 12 May 2019 16:13:50 -0300</pubDate>
       
       <guid>https://mferrac.github.io/post/feg18-aula03/</guid>
-      <description>Dados para a aula Baixar em https://transfer.sh/I109G/aula03.zip
+      <description>Homework  Baixe os dados em https://transfer.sh/UcsrP/cardio_data.csv
+ Importe os dados no Rstudio
+ Envie as respostas pelo formulário
+  Dados para a aula Baixar em https://transfer.sh/I109G/aula03.zip
 Instalações Para esta aula, serão necessários os pacotes:
- mlr: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso. Mais informações no site. rpart: A implementação do algoritmo de árvores de decisão. Mais informações no manual. rpart.plot: Contém funções para visualização da árvore de decisão. tidyverse: Instalado na aula 02.  Para instalar cada um destes pacotes, basta usar o comandos install.</description>
+ mlr: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso. Mais informações no site. rpart: A implementação do algoritmo de árvores de decisão. Mais informações no manual. rpart.</description>
     </item>
     
     <item>
