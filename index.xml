@@ -5,8 +5,27 @@
     <description>Recent content in Matheus Ferraciolli on Matheus Ferraciolli</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 May 2019 16:13:50 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 20 May 2019 12:00:50 -0300</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Análise de Dados - Aula 04</title>
+      <link>https://mferrac.github.io/post/feg18-aula04/</link>
+      <pubDate>Mon, 20 May 2019 12:00:50 -0300</pubDate>
+      
+      <guid>https://mferrac.github.io/post/feg18-aula04/</guid>
+      <description>
+
+&lt;h1 id=&#34;instalações&#34;&gt;Instalações&lt;/h1&gt;
+
+&lt;p&gt;Para esta aula, serão necessários os pacotes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: Implementação de &lt;code&gt;knn&lt;/code&gt; para classificação&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FNN&lt;/code&gt;: Tem uma implementação de &lt;code&gt;knn&lt;/code&gt; para regressão&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Análise de Dados - Aula 03</title>
