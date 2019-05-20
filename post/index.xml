@@ -27,12 +27,12 @@
       <pubDate>Sun, 12 May 2019 16:13:50 -0300</pubDate>
       
       <guid>https://mferrac.github.io/post/feg18-aula03/</guid>
-      <description>Homework  Baixe os dados em https://transfer.sh/UcsrP/cardio_data.csv
+      <description>Homework  Baixe os dados na pasta Homework da Aula 03
  Importe os dados no Rstudio
  Envie as respostas pelo formulário
   Dados para a aula Baixar em https://transfer.sh/I109G/aula03.zip
 Instalações Para esta aula, serão necessários os pacotes:
- mlr: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso. Mais informações no site. rpart: A implementação do algoritmo de árvores de decisão. Mais informações no manual. rpart.</description>
+ mlr: Esta bibloteca serve com interface para os algoritmos de machine learning usados no curso. Mais informações no site. rpart: A implementação do algoritmo de árvores de decisão. Mais informações no manual.</description>
     </item>
     
     <item>
