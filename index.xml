@@ -5,8 +5,65 @@
     <description>Recent content in Matheus Ferraciolli on Matheus Ferraciolli</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 May 2019 12:00:50 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 27 May 2019 11:21:54 -0300</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>FEG18 Aula05</title>
+      <link>https://mferrac.github.io/post/feg18-aula05/</link>
+      <pubDate>Mon, 27 May 2019 11:21:54 -0300</pubDate>
+      
+      <guid>https://mferrac.github.io/post/feg18-aula05/</guid>
+      <description>
+
+&lt;h2 id=&#34;aula-05&#34;&gt;Aula 05&lt;/h2&gt;
+
+&lt;p&gt;Na aula de hoje, usaremos os dados e códigos da &lt;a href=&#34;https://drive.google.com/drive/u/0/folders/1yn_5FuPA_wRddyM7WR8_fo94-6DDut3W&#34; target=&#34;_blank&#34;&gt;pasta da Aula 05&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1ª-parte&#34;&gt;1ª parte&lt;/h3&gt;
+
+&lt;p&gt;Na primeira parte da aula trabalharemos com dados sintéticos, denominados &lt;code&gt;first&lt;/code&gt;, &lt;code&gt;second&lt;/code&gt; e &lt;code&gt;third&lt;/code&gt; &lt;code&gt;data&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;2ª-parte&#34;&gt;2ª parte&lt;/h3&gt;
+
+&lt;p&gt;Na segunda parte, usaremos o conjunto de dados de cereais (&lt;code&gt;cereals.csv&lt;/code&gt;).
+Com os atributos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt; : Name of cereal&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;mfr&lt;/strong&gt; : Manufacturer of cereal
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;A&lt;/strong&gt; = American Home Food Products;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;G&lt;/strong&gt; = General Mills&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;K&lt;/strong&gt; = Kelloggs&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;N&lt;/strong&gt; = Nabisco&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;P&lt;/strong&gt; = Post&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Q&lt;/strong&gt; = Quaker Oats&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R&lt;/strong&gt; = Ralston Purina&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;type&lt;/strong&gt;:
+
+&lt;ul&gt;
+&lt;li&gt;cold&lt;/li&gt;
+&lt;li&gt;hot&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;calories&lt;/strong&gt;: calories per serving&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;protein&lt;/strong&gt;: grams of protein&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fat&lt;/strong&gt;: grams of fat&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sodium&lt;/strong&gt;: milligrams of sodium&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;fiber&lt;/strong&gt;: grams of dietary fiber&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;carbo&lt;/strong&gt;: grams of complex carbohydrates&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;sugars&lt;/strong&gt;: grams of sugars&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;potass&lt;/strong&gt;: milligrams of potassium&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;vitamins&lt;/strong&gt;: vitamins and minerals - 0, 25, or 100, indicating the typical percentage of FDA recommended&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shelf&lt;/strong&gt;: display shelf (1, 2, or 3, counting from the floor)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;weight&lt;/strong&gt;: weight in ounces of one serving&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;cups&lt;/strong&gt;: number of cups in one serving&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;rating&lt;/strong&gt;: a rating of the cereals (Possibly from Consumer Reports?)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Análise de Dados - Aula 04</title>
