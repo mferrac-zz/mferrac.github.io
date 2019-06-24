@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.1.0">
+  <meta name="generator" content="Hugo 0.55.6" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Matheus Agostini Ferraciolli">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Yield modeling The harvesting operation involves transportation of heavy agricultural machinery across great distances in the fields. Effective management of field operations can improve adequate machine use planning, which, in turn can reduce costs related to fuel and workforce allocation.
+If we can more accurately predict how much will be harvested in each field, we can have a better planning of the whole operation. In this post I&rsquo;ll discuss how we can use available data and moder machine learning algorthims to improve harvest prediction.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://mferrac.github.io/post/sugarcane-yield/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="https://mferrac.github.io/index.xml" type="application/rss+xml" title="Matheus Ferraciolli">
+  <link rel="feed" href="https://mferrac.github.io/index.xml" type="application/rss+xml" title="Matheus Ferraciolli">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://mferrac.github.io/post/sugarcane-yield/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Matheus Ferraciolli">
+  <meta property="og:url" content="https://mferrac.github.io/post/sugarcane-yield/">
+  <meta property="og:title" content="Sugarcane Yield | Matheus Ferraciolli">
+  <meta property="og:description" content="Yield modeling The harvesting operation involves transportation of heavy agricultural machinery across great distances in the fields. Effective management of field operations can improve adequate machine use planning, which, in turn can reduce costs related to fuel and workforce allocation.
+If we can more accurately predict how much will be harvested in each field, we can have a better planning of the whole operation. In this post I&rsquo;ll discuss how we can use available data and moder machine learning algorthims to improve harvest prediction."><meta property="og:image" content="https://mferrac.github.io/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-06-24T16:05:32-03:00">
+  
+  <meta property="article:modified_time" content="2019-06-24T16:05:32-03:00">
+  
+
+  
+
+  
+
+  <title>Sugarcane Yield | Matheus Ferraciolli</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Matheus Ferraciolli</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#featured">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Sugarcane Yield</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-06-24 16:05:32 -0300 -03" itemprop="datePublished">
+<meta content="2019-06-24 16:05:32 -0300 -03" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Jun 24, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Sugarcane%20Yield&amp;url=https%3a%2f%2fmferrac.github.io%2fpost%2fsugarcane-yield%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmferrac.github.io%2fpost%2fsugarcane-yield%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmferrac.github.io%2fpost%2fsugarcane-yield%2f&amp;title=Sugarcane%20Yield"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmferrac.github.io%2fpost%2fsugarcane-yield%2f&amp;title=Sugarcane%20Yield"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Sugarcane%20Yield&amp;body=https%3a%2f%2fmferrac.github.io%2fpost%2fsugarcane-yield%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<h1 id="yield-modeling">Yield modeling</h1>
+
+<p>The harvesting operation involves transportation of heavy agricultural machinery across great distances in the fields.
+Effective management of field operations can improve adequate machine use planning, which, in turn can reduce costs related to fuel and workforce allocation.</p>
+
+<p>If we can more accurately predict how much will be harvested in each field, we can have a better planning of the whole operation. In this post I&rsquo;ll discuss how we can use available data and moder machine learning algorthims to improve harvest prediction.</p>
+
+<p><em>Please</em> note that the data is not allowed to be shared, so I&rsquo;ll just post this as a guideline of what we can usually consider when modelling yield and show some of the insights we had along the way.</p>
+
+<p>My first publication regarded yield modeling for sugarcane comparing
+We used a dataset containing, for every field:</p>
+
+<ul>
+<li>Production data for 4 diferent mills across 4 years of harvest</li>
+<li>Climate data acquired from satelites and crossed on field level using <code>shapefiles</code> of every field</li>
+<li>Soil data</li>
+</ul>
+
+<p>In the end, we developed models to predict, on field level, how much will be harvested in that year.
+Below, I&rsquo;ll explain the steps taken to model a problem like this.
+The same procedure may be applied to many other crops, given an available dataset.</p>
+
+<pre><code class="language-python">df = pd.read_csv('/home/mferrac/data/sugarcane.csv')
+df.head()
+</code></pre>
+
+<p>Each row represents data from a whole cicle.
+ Each column (or <strong>attribute</strong>) represents data from a whole cicle.
+ The problem we aim to solve is &ldquo;given a field had a cycle with given attributes, how much will be harvested there?&rdquo;.
+ There is the bigger problem where we might not have some of these atributes like temperature, rainfall, etc. in advance, but I&rsquo;ll leave that for another post.</p>
+
+<h2 id="available-attributes">Available attributes</h2>
+
+<p>In total, there were 63 attributes available, divided in production, soil, climate and chemical input data.</p>
+
+<h3 id="production-data">Production data</h3>
+
+<ul>
+<li><code>field_id</code> : ID&rsquo;s not used for prediction</li>
+<li><code>farmcod</code>: Part of the ID</li>
+<li><code>test</code>: <code>0</code> or <code>1</code> if it is in the <code>test_set</code> or not</li>
+<li><code>X</code>: Longitude</li>
+<li><code>Y</code>: Latitude</li>
+<li><code>tonnes_harvested</code>: Tonnes harvested in the field (what we aim to predict)</li>
+<li><code>prod_env</code>: Grade (AB, C, D, E, etc.) related to the local conditions to produce sugarcane</li>
+<li><code>spac</code>: Spacing betweeen rows</li>
+<li><code>harvest_no</code>: Number of harvests. As a semiperennial culture, sugarcane is harvested more than once. It is usually an important attribute.</li>
+<li><code>fire_raw</code>: Was fire used or not before harvesting</li>
+<li><code>no_field</code>: Related to the ID</li>
+<li><code>plant</code>: Date of planting</li>
+<li><code>harv</code>: Date of harvesting</li>
+<li><code>prev_harv</code>: Date of previous harves</li>
+<li><code>field</code>: Related to the ID</li>
+<li><code>mill</code>: which Mill the field belongs to</li>
+<li><code>variety</code>: Sugarcane variety planted in the field. Usually also very important for prediction.</li>
+</ul>
+
+<h3 id="soil-data">Soil data</h3>
+
+<p>Some granularity data and chemical properties, I won&rsquo;t get into the specifics like the one before but you can ask in the comments.</p>
+
+<h3 id="climate-data">Climate data</h3>
+
+<p>we downloaded land surface temperature and accumulated rainfall measures from NASA satellites, and broke them down in different intervals, for example:</p>
+
+<ul>
+<li><code>temp_1</code></li>
+<li><code>temp_2</code></li>
+<li><code>temp_3</code></li>
+<li><code>rain_1</code></li>
+<li><code>rain_2</code></li>
+<li><code>rain_3</code></li>
+</ul>
+
+<p>The number suffix refers to the time interval in relation to the crop planting and harvesting date:</p>
+
+<ul>
+<li><code>1</code> is for 90 days after planting</li>
+<li><code>3</code> is for 90 days before harvesting</li>
+<li><code>2</code> is for the time between 1 and 3 and may vary depending on management decisions</li>
+</ul>
+
+<h2 id="modeling-steps">Modeling steps</h2>
+
+<p>The usual steps in modeling are:</p>
+
+<ol>
+<li>Import the dataset</li>
+<li>Preprocess. In this case, we had to:
+
+<ol>
+<li>Deal with missing data</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html" target="_blank">Onehot-encode</a> categorical data</li>
+</ol></li>
+<li>Cluster data to deal with spatial autocorrelation</li>
+<li>Split between train and test sets</li>
+<li>Optimize hyperparameters of the chosen regression techniques</li>
+<li>Compare the performance of the final models on test data</li>
+<li>Discuss our findings and reason how it compares with a no machine learning approach</li>
+</ol>
+
+<h3 id="the-dataset">The dataset</h3>
+
+<p>We will start from the fully strucutred dataset, i. e., containing all data described previously. Before getting to this stage we had to do a lot of data collecting and cleaning in order to merge production, soil and climate data into one concise dataset. In total we had about 18000 observations from 4 different mills.</p>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>field_id</th>
+      <th>farmcod</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>cluster</th>
+      <th>tonnes_harvested</th>
+      <th>prod_env</th>
+      <th>spac</th>
+      <th>harvest_no</th>
+      <th>fire_raw</th>
+      <th>...</th>
+      <th>clay</th>
+      <th>frt</th>
+      <th>cec</th>
+      <th>sand</th>
+      <th>sb</th>
+      <th>silt</th>
+      <th>soil</th>
+      <th>txt</th>
+      <th>v</th>
+      <th>test_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12000101001</td>
+      <td>120001</td>
+      <td>387040.077051</td>
+      <td>7.521803e+06</td>
+      <td>95</td>
+      <td>55.55</td>
+      <td>G</td>
+      <td>1,4</td>
+      <td>6</td>
+      <td>S</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>LP</td>
+      <td>4.0</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12000101002</td>
+      <td>120001</td>
+      <td>387003.564321</td>
+      <td>7.521312e+06</td>
+      <td>95</td>
+      <td>48.38</td>
+      <td>E</td>
+      <td>1,4</td>
+      <td>6</td>
+      <td>S</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>LP</td>
+      <td>4.0</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12000101003</td>
+      <td>120001</td>
+      <td>386857.061114</td>
+      <td>7.521003e+06</td>
+      <td>95</td>
+      <td>42.70</td>
+      <td>E</td>
+      <td>1,4</td>
+      <td>6</td>
+      <td>S</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>LP</td>
+      <td>4.0</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12000101004</td>
+      <td>120001</td>
+      <td>386718.526710</td>
+      <td>7.520828e+06</td>
+      <td>95</td>
+      <td>43.41</td>
+      <td>E</td>
+      <td>1,4</td>
+      <td>6</td>
+      <td>S</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>LP</td>
+      <td>4.0</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12000101005</td>
+      <td>120001</td>
+      <td>386488.755285</td>
+      <td>7.520799e+06</td>
+      <td>95</td>
+      <td>43.84</td>
+      <td>E</td>
+      <td>1,4</td>
+      <td>6</td>
+      <td>S</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>LP</td>
+      <td>4.0</td>
+      <td>NaN</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 63 columns</p>
+</div>
+
+<h4 id="number-of-observations-per-mill">Number of observations per mill</h4>
+
+<pre><code class="language-python">df.mill.value_counts()
+</code></pre>
+
+<pre><code>B    5365
+D    5051
+A    3958
+C    3368
+Name: mill, dtype: int64
+</code></pre>
+
+<h2 id="clustering-data">Clustering data</h2>
+
+<p>We divided each mill in clusters of field due to spatial autocorrelation using a <code>k-means</code> algorithm.
+To choose the right K, we must check, for each mill, how the <a href="https://scikit-learn.org/stable/modules/clustering.html" target="_blank">inertia</a> of the dataset varies with the ammount (K) of clusters. Based on that, we choose a low K that leads to a big decrease in inertia without increasing the K value too much. This is called the <a href="https://pythonprogramminglanguage.com/kmeans-elbow-method/" target="_blank">&ldquo;elbow method&rdquo;</a>.</p>
+
+<pre><code class="language-python">%%time
+k_list = []
+inertia = []
+for k in tqdm(np.arange(50,200,10)):
+    k_mills_inertia = []
+    for mill in df.mill.unique():
+        df_to_cluster = df[df.mill == mill]
+        coords = np.array(list(zip(df_to_cluster.X,df_to_cluster.Y)))
+        kmeans = KMeans(n_clusters=k, random_state=0).fit(coords)
+        k_mills_inertia.append(kmeans.inertia_)
+    k_list.append(k)
+    inertia.append(sum(k_mills_inertia))
+</code></pre>
+
+<pre><code>100%|██████████| 15/15 [00:42&lt;00:00,  3.71s/it]
+
+CPU times: user 1min 47s, sys: 4min 6s, total: 5min 53s
+Wall time: 42.4 s
+</code></pre>
+
+<p>Analysing the graph below (this is from one mill, but the others are siminlar), we should look for the elbow, which appears to be between 80 and 110 clusters per mill. I&rsquo;ll use 100 clusters.</p>
+
+<pre><code class="language-python">plt.scatter(k_list, inertia)
+plt.title('K for means')
+plt.xlabel('K')
+plt.ylabel('Inertia')
+plt.savefig('./figures/choosing_k.jpg',dpi = 300)
+</code></pre>
+
+<p><img src="https://i.postimg.cc/yxpPSVrv/choosing-k.jpg" alt="png" /></p>
+
+<h4 id="clustering-observations">Clustering observations</h4>
+
+<p>Choosing a <code>K=100</code> means that for every mill, we will make a 100 clusters of fields based on the <code>X,Y</code> coordinates of every field. Since the clusters are based only on the coordinates of the centerpoint of every field, this means that nearby fields will be grouped togheter.</p>
+
+<p>Below, I show how each mill&rsquo;s map is divided after clustering observations and how they are split between <code>training_set</code>, in blue, and <code>test_set</code>, in pink.</p>
+
+<p><img src="https://i.postimg.cc/QtbShggL/cluster-test-sets-A.jpg" alt="png" /></p>
+
+<p><img src="https://i.postimg.cc/Vkr7nCwM/cluster-test-sets-B.jpg" alt="png" /></p>
+
+<p><img src="https://i.postimg.cc/HnkzxJ3r/cluster-test-sets-C.jpg" alt="png" /></p>
+
+<p><img src="https://i.postimg.cc/0QxZTXwd/cluster-test-sets-D.jpg" alt="png" /></p>
+
+<h2 id="train-and-test-sets">Train and test sets</h2>
+
+<p>In order to have a better estimate of how much our model can perform in unseen data we will use the pink fields showed in the graphs above as test fields.
+These fields were <strong>manually</strong> selected and are <strong>at least</strong> 3km appart from other fields.</p>
+
+<p>This means that our model will first be trained in the <code>blue</code> fields and tested in the <code>pink</code> fields.
+During training in the blue fields we will use <a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank">cross-validation</a> and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html" target="_blank">random search</a> to optimize each model&rsquo;s hyperparameters.</p>
+
+<p>After we find the best hyperparameters for every regressor, we train them on the whole blue dataset and compare how they fare on the pink fields, which are further apart and not used at all in training.</p>
+
+<h2 id="overview-clustered-vs-naive">Overview: Clustered vs. Naive</h2>
+
+<p>We&rsquo;ve split data into <code>mod</code> and <code>test</code> sets. The <code>test</code> set is composed by fields which are at least 3km apart from other fields. We will use this data to compare two approaches here:</p>
+
+<ol>
+<li><p><strong>Naive</strong>: We&rsquo;ll use regular K-fold cross validation in the <code>mod</code> set to tune hyperparameters and get the best cross validaton error results. As we&rsquo;ll see below, this approach can send nearby, and, therefore, similar, if spatial autocorrelation is present), to <code>train</code> and <code>test</code> sets. This way, the model is trained and tested in more correlated observations.</p></li>
+
+<li><p><strong>Grouped</strong>: We&rsquo;ll usa a group K-fold cross validation grouping observations by clusters to tune hyperparameters on the <code>mod</code> set. This approach makes it less likely that nearby fields be sent to different folds suring cross validation.</p></li>
+</ol>
+
+<p>In the graphs below we can se how a mill&rsquo;s data was split during two different steps of the 5 fold cross validations. CV test sets are in green and CV training set are in gray. The main takeaway here is to note how nearby observations are kept in different sets, except for border cases, in the <code>Clustered</code> approach. In the <code>Naive</code> one, test fields are scattered throughout the dataset and nearby fields can go to training and test sets during CV, which, as we&rsquo;ll se, yields an optimistic Cross Validation Mean Absolute Error.</p>
+
+<p><img src="./figures/cv_compare_split_0_mill_D.jpghttps://i.postimg.cc/yN0vrCk8/cv-compare-split-0-mill-D.jpg" alt="png" /></p>
+
+<p><img src="https://i.postimg.cc/VkxKRksh/cv-compare-split-4-mill-D.jpg./figures/cv_compare_split_4_mill_D.jpg" alt="png" /></p>
+
+<h2 id="hyperparameter-optimization">Hyperparameter optimization</h2>
+
+<p>As for the modeling techniques, we compared how <code>XGBoost</code> (from now on <code>xgb</code>), <code>Random Forest</code> (<code>rf</code>) and <code>Support Vector Regression</code> (<code>svr</code>), perform on this kind of dataset. The hyperparameters tuned are specified below.</p>
+
+<pre><code class="language-python">xgb_hyperparameters = {'eta': np.array([0.08, 0.9 , 0.28]),
+                       'max_depth': [1, 3, 5, 7],
+                       'min_child_weight': np.array([ 1,  3,  5,  7,  9, 11])}
+</code></pre>
+
+<pre><code class="language-python">svr_hyperparameters = {
+    'C' : 10.**np.arange(-5,3,1),
+    'epsilon' : 10.**np.arange(-8,0,1)
+}
+</code></pre>
+
+<pre><code class="language-python">rf_hyperparameters = {
+    'n_estimators': np.arange(100,500,100),
+    'max_depth': np.arange(1,9,2),
+    'max_features':[3,5,7,11,15,20]
+}
+</code></pre>
+
+<p>I will leave the sample code below only because it summarises the steps taken in a concise way. I know it can be improved, but I&rsquo;ll leave that for the kernel I plan to write as this is not the focus of the post.</p>
+
+<pre><code class="language-python">%%time
+all_mills = {}
+for mill in ['A','B','C','D']:
+    &quot;&quot;&quot;
+    To predict for every mill, we only have to filter mod by mill here
+    &quot;&quot;&quot;
+    X_mod = mod.loc[(mod.test_set == 0)&amp;(mod.mill == mill),np.hstack([categoric_columns,numeric_columns])]
+    y_mod = mod['tonnes_harvested'].loc[(mod.test_set == 0)&amp;(mod.mill == mill)]
+    X_test = mod.loc[(mod.test_set == 1)&amp;(mod.mill == mill),np.hstack([categoric_columns,numeric_columns])]
+    y_test = mod['tonnes_harvested'].loc[(mod.test_set == 1)&amp;(mod.mill == mill)]
+    #preprocess pipeline
+    X_mod = preprocess.fit_transform(X_mod)
+    X_test = preprocess.fit_transform(X_test)
+    X_test = X_test.reindex(columns = X_mod.columns, 
+                                  fill_value=0)
+
+
+    #generate NAIVE cv splits
+    naive_cv = KFold(n_splits = 5,shuffle=True)
+    naive_cv.get_n_splits(X_mod,y_mod)
+    naive_splits = list(naive_cv.split(X_mod,y_mod))
+
+    #generate GROUPS cv splits
+    groups_mod = mod['cluster_id'].loc[(mod.test_set == 0)&amp;(mod.mill == mill)]
+    grouped_cv = GroupKFold(n_splits=5)
+    grouped_cv.get_n_splits(X_mod,y_mod,groups_mod)
+    grouped_splits = list(grouped_cv.split(X_mod,y_mod,groups_mod))
+
+
+    #test all estimators
+    grouped_result_dict = {}
+    naive_result_dict = {}
+    estimators = [XGBRegressor(),RandomForestRegressor(),SVR()]
+    hyperparameters = [xgb_hyperparameters,rf_hyperparameters,svr_hyperparameters]
+    model_ids = ['xgb','rf','svr']
+
+    for est,hyper,ids in zip(estimators,hyperparameters,model_ids):
+        grouped_result_dict[ids] = Results(est,hyper, n_iter=number_iterations,
+                                    cv_split = grouped_splits,
+                                    scoring='neg_mean_absolute_error',
+                                    refit = True,
+                                    X = X_mod,y = y_mod, X_test=X_test,y_test=y_test,mod_id=ids)
+        grouped_result_dict[ids].get_results()
+
+    for est,hyper,ids in zip(estimators,hyperparameters,model_ids):
+        naive_result_dict[ids] = Results(est,hyper, n_iter=number_iterations,
+                                    cv_split = naive_splits,
+                                    scoring='neg_mean_absolute_error',
+                                    refit = True,
+                                    X = X_mod,y = y_mod, X_test=X_test,y_test=y_test,mod_id=ids)
+        naive_result_dict[ids].get_results()
+
+    #Generate a dataframe with all results
+    final_results =  pd.DataFrame({'Estimator' : ['XGB','Random Forest','SVR'],
+                                   'Grouped CV MAE' : [abs(x.estimator.best_score_) for x in grouped_result_dict.values()],
+                                   'Naive CV MAE' : [abs(x.estimator.best_score_) for x in naive_result_dict.values()],
+                                   'Grouped Test MAE' : [x.test_mae for x in grouped_result_dict.values()],
+                                   'Naive Test MAE' : [x.test_mae for x in naive_result_dict.values()]})
+    final_results['Grouped CV - Test Error'] = abs(final_results['Grouped CV MAE'] - final_results['Grouped Test MAE'])
+    final_results['Naive CV - Test Error'] = abs(final_results['Naive CV MAE'] - final_results['Naive Test MAE'])
+    final_results['Mill'] = mill
+    all_mills[mill] = final_results
+</code></pre>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>The table below summarises the results found for every mill and technique. We compared the cross validation error for the <code>grouped</code> and <code>naive</code> aproaches and how it differes from the test error in both scenarios. All numbers are <code>tonnes per hectare</code>.</p>
+
+<pre><code class="language-python">model_results
+</code></pre>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>estimator</th>
+      <th>grouped_cv_mae</th>
+      <th>naive_cv_mae</th>
+      <th>grouped_test_mae</th>
+      <th>naive_test_mae</th>
+      <th>grouped_cv_test_error</th>
+      <th>naive_cv_test_error</th>
+      <th>mill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGB</td>
+      <td>12.298977</td>
+      <td>8.245792</td>
+      <td>13.997387</td>
+      <td>13.997387</td>
+      <td>1.698411</td>
+      <td>5.751595</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>13.625747</td>
+      <td>12.048800</td>
+      <td>14.914672</td>
+      <td>14.929350</td>
+      <td>1.288925</td>
+      <td>2.880551</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SVR</td>
+      <td>13.514483</td>
+      <td>6.850801</td>
+      <td>15.184413</td>
+      <td>15.184414</td>
+      <td>1.669931</td>
+      <td>8.333613</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>XGB</td>
+      <td>11.837691</td>
+      <td>6.785474</td>
+      <td>11.895676</td>
+      <td>11.882763</td>
+      <td>0.057985</td>
+      <td>5.097290</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>12.675220</td>
+      <td>10.280449</td>
+      <td>12.531138</td>
+      <td>12.635846</td>
+      <td>0.144082</td>
+      <td>2.355396</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SVR</td>
+      <td>12.431233</td>
+      <td>6.058838</td>
+      <td>13.856015</td>
+      <td>13.854876</td>
+      <td>1.424783</td>
+      <td>7.796038</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>XGB</td>
+      <td>13.383667</td>
+      <td>7.591855</td>
+      <td>17.288527</td>
+      <td>17.490687</td>
+      <td>3.904859</td>
+      <td>9.898832</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>14.191126</td>
+      <td>10.698596</td>
+      <td>16.503020</td>
+      <td>16.498087</td>
+      <td>2.311894</td>
+      <td>5.799491</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SVR</td>
+      <td>16.039336</td>
+      <td>7.905194</td>
+      <td>18.839928</td>
+      <td>18.839924</td>
+      <td>2.800592</td>
+      <td>10.934730</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>XGB</td>
+      <td>10.355872</td>
+      <td>5.868488</td>
+      <td>13.835605</td>
+      <td>13.835605</td>
+      <td>3.479733</td>
+      <td>7.967117</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>12.142127</td>
+      <td>10.096490</td>
+      <td>15.038501</td>
+      <td>15.265431</td>
+      <td>2.896373</td>
+      <td>5.168941</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SVR</td>
+      <td>11.182533</td>
+      <td>4.675396</td>
+      <td>14.465358</td>
+      <td>14.465348</td>
+      <td>3.282825</td>
+      <td>9.789953</td>
+      <td>D</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>We can first say that even though some models have the same performance on the test sets for either the <code>grouped</code> or <code>naive</code> approach, the difference between <code>cross valitaion error</code> is much smaller for the <code>grouped</code> approach. This means that we can better estimate how a model will perform with unseen data by using the <code>grouped</code> approach and cluster data before training.</p>
+
+<p>For example, using the results for mill <code>A</code> and <code>xgb</code> (1st line). The <code>grouped</code> CV mean absolute error was 12.3, the naive was <code>8.2</code>. The actual error in the test set was the same for both but using a <code>grouped</code> cross validation leads to a much smaller difference between CVverror than using a <code>naive</code> approach (1.7 for <code>grouped</code> vs 5.8 for <code>naive</code>). The graph bellow gives us a better view of this pattern.</p>
+
+<p><img src="https://i.postimg.cc/TYH7Kczf/diff-cv-test-mae.jpgoutput_62_0.png" alt="png" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>If we were to predict each field&rsquo;s yield using the average tonnes per hectare harvested, the <code>mean absolute error</code> would be vary between 17 to 18 tonnes per hectare, depending on the mill. By using these models, we might reduce (using <code>xgb</code> results as an example) these to 13-14 tonnes per hectare. That is a 18% decrease in error prediction. If a common sugarcane carrier truck can transport 15tonnes, this may be significant to take into consideration when planning harvest season.</p>
+
+<p>Even though it does not seem like a big improvement and besides using the mean we can also segment the mean by number of harvests and variety, etc. this dataset was acquired between 2010 and 2014. Since we&rsquo;re in 2019 and data adequate data acquisition is more prioritized, modern datasets may <em>yield</em> better results. Another important point to note is that this approach is independent of the selected crop. We can use the same routine to predict soy, corn, cotton and many other main crop, given an adequately sized dataset.</p>
+
+    </div>
+
+    
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hu34e56213c3e3f74966d30af1de5d6a60_201475_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Matheus Agostini Ferraciolli</a></h5>
+    <h6 class="card-subtitle">MSc candidate</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:matheus.ferraciolli@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/mferraciolli" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.com.br/citations?hl=en&amp;user=aKHqRN4AAAAJ" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/mferrac" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://kaggle.com/mferrac" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="/files/cv.pdf" >
+          <i class="ai ai-cv"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.d7381f2d79e6271d4da28f474f49096c.js"></script>
+
+  </body>
+</html>
+
